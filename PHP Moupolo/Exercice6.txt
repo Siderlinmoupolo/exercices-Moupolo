@@ -1,0 +1,61 @@
+
+<?php
+/**
+ * ecrire un programme qui génère une année et un mois 
+ * et affiche le nombre de jours du mois
+ */
+
+ define("MIN_MOIS",1);
+ define("MAX_MOIS",20);
+ define("MIN_AN",1800);
+ define("MAX_AN",2021);
+ define("MIN_JOUR",1);
+ define("MAX_JOUR",31);
+ $jour=rand(MIN_JOUR,MAX_JOUR);
+ $an=rand(MIN_AN,MAX_AN);
+ $mois=rand(MIN_MOIS,MAX_MOIS);
+ 
+ if($mois>12){
+    echo("la date $jour/$mois/$an n'est pas valide");
+ }
+ else{
+     switch($mois){
+        case 4 :
+        case 6 :       
+        case 9 :
+        case 11 :
+            $nbJours=30;
+            break;
+        case 2 :
+            if(($an%100==0 && $an%400==0)||($an%4==0 &&  $an%100!=0)){
+                $nbJours=29;
+            }
+            else{
+                $nbJours=28;
+            }
+            break;
+        default:
+            $nbJours=31;
+     }
+     if($jour<=$nbJours){
+         echo("la date $jour/$mois/$an est valide<br>");
+         if($jour<$nbJours){
+             $jour+=1;
+         }
+         else{
+             //si le jour est égal au nombre de jours du mois
+             $jour=1;
+             if($mois==12){
+                $mois=1;
+                $an+=1;
+             }
+             else{
+                $mois+=1;
+            }
+         }
+         echo("la date suivante  : $jour/$mois/$an");
+     }
+     else{
+        echo("la date $jour/$mois/$an est invalide");
+     }
+ }
